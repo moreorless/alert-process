@@ -1,6 +1,6 @@
 name: "低等级告警规则"
 description: "处理等级小于2的告警，发送syslog"
 priority: 2
-condition: "alert.getValue('severity') < 2"
+condition: "(alert.getValue('severity') < 2) && (alert.getValue('id') > 1)"
 actions:
-  - "alertActionManager.executionAction(\"action-syslog\", alert, context);"
+  - "alertActionManager.executionAction(alert, \"action-syslog\", 'context2');"

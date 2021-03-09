@@ -2,10 +2,7 @@ package org.example.process;
 
 import org.example.alert.Alert;
 import org.example.process.action.AlertActionManager;
-import org.jeasy.rules.api.Facts;
-import org.jeasy.rules.api.Rule;
-import org.jeasy.rules.api.Rules;
-import org.jeasy.rules.api.RulesEngine;
+import org.jeasy.rules.api.*;
 import org.jeasy.rules.core.DefaultRulesEngine;
 import org.jeasy.rules.mvel.MVELRuleFactory;
 import org.jeasy.rules.support.reader.YamlRuleDefinitionReader;
@@ -21,7 +18,7 @@ import java.util.Map;
 public class AlertProcessImpl implements IAlertProcess{
 
     private Rules rules = new Rules();
-    private RulesEngine rulesEngine = new DefaultRulesEngine();
+    private DefaultRulesEngine rulesEngine = new DefaultRulesEngine();
 
     private int counter = 1;
 
@@ -35,6 +32,9 @@ public class AlertProcessImpl implements IAlertProcess{
      */
     public void init(){
         registerRules();
+
+        RuleListener ruleListener = new ActionRuleListner();
+        rulesEngine.registerRuleListener(ruleListener);
     }
 
 

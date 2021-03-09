@@ -3,4 +3,4 @@ description: "处理等级大于2的告警"
 priority: 2
 condition: "alert.getValue('severity') > 2"
 actions:
-  - "alertActionManager.executionAction(\"action-merge\", alert, context);"
+  - "alertActionManager.executionAction(alert, \"action-merge\",  'context1');"

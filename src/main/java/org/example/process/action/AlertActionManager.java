@@ -1,6 +1,7 @@
 package org.example.process.action;
 
 import org.example.alert.Alert;
+import org.jeasy.rules.api.Rule;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,15 +33,16 @@ public class AlertActionManager {
 
     /**
      * 执行告警动作
-     * @param actuator  执行机构id，如"action-syslog / action-merge"
+     * @param actionId  执行机构id，如"action-syslog / action-merge"
      * @param alert
-     * @param context
+     * @param actionContext
+     *
      */
-    public void executionAction(String actuator, Alert alert, Map<String, Object> context){
-        if (!alertActionMap.containsKey(actuator)){
+    public void executionAction(Alert alert, String actionId, String actionContext){
+        if (!alertActionMap.containsKey(actionId)){
             System.err.println("没有找到动作执行器");
             return;
         }
-        alertActionMap.get(actuator).execute(alert, context);
+        alertActionMap.get(actionId).execute(alert, actionContext);
     }
 }
